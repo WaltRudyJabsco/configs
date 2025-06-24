@@ -4,9 +4,10 @@ process-unmapped-keys yes
 
 (defsrc
   caps a s d f h
-  j k l ;
-  v
-  lalt ralt
+  j k l ; 
+  u i o p 
+  c v
+  lmet rmet
 )
 
 (defvar 
@@ -15,21 +16,40 @@ process-unmapped-keys yes
 )
 
 (defalias
-a-mod (tap-hold $tap-time $hold-time a lmet)
+a-mod (tap-hold $tap-time $hold-time a lctl)
 s-mod (tap-hold $tap-time $hold-time s lalt)
 d-mod (tap-hold $tap-time $hold-time d lsft)
-f-mod (tap-hold $tap-time $hold-time f lctl)
-j-mod (tap-hold $tap-time $hold-time j rctl)
+f-mod (tap-hold $tap-time $hold-time f lmet)
+
+j-mod (tap-hold $tap-time $hold-time j rmet)
 k-mod (tap-hold $tap-time $hold-time k rsft)
 l-mod (tap-hold $tap-time $hold-time l ralt)
-;-mod (tap-hold $tap-time $hold-time ; rmet)
+;-mod (tap-hold $tap-time $hold-time ; rctl)
+
 v-vim (tap-hold $tap-time $hold-time v (layer-toggle vim-arrows))
+c-mod (tap-hold $tap-time $hold-time c (layer-toggle mouse))
+
+ mslft (movemouse-left 4 4)
+ msdwn (movemouse-down 4 4)
+  msup   (movemouse-up 4 4)
+  msrgt (movemouse-right 4 4)
+
+
+  mswup  (mwheel-up 50 30)
+  mswdn  (mwheel-down 50 30)
+
 )
 
 (deflayer base
-  esc @a-mod @s-mod @d-mod @f-mod h @j-mod @k-mod @l-mod @;-mod ret bspc
+  esc @a-mod @s-mod @d-mod @f-mod h @j-mod @k-mod @l-mod @;-mod u i o p @c-mod @v-vim ret bspc
 )
 
 (deflayer vim-arrows
-_ _ _ _ _ lft down up rght _ _ _ _
+_ _ _ _ _ lft down up rght _ _ _ _ _ _ _ _ _
 )
+
+
+(deflayer mouse
+_ _ _ _ _ @mslft @msdwn @msup @msrgt @mswdn mrgt mlft mmid @mswup _ _ _ _
+)
+
